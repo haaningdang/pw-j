@@ -1,0 +1,79 @@
+package com.pw.cache.spec;
+
+import cn.hutool.core.collection.CollectionUtil;
+import cn.hutool.core.map.MapUtil;
+import com.pw.cache.PwCacheApi;
+import org.springframework.data.redis.core.RedisTemplate;
+
+import java.util.*;
+import java.util.concurrent.TimeUnit;
+
+public class PwCacheRedisSpec<T> implements PwCacheApi<T> {
+
+    private final RedisTemplate<String, T> redisTemplate;
+
+    private final Collection<String> KEYS = CollectionUtil.newArrayList();
+
+    public PwCacheRedisSpec(RedisTemplate<String, T> redisTemplate) {
+        this.redisTemplate = redisTemplate;
+    }
+
+    @Override
+    public void init() {
+
+    }
+
+    @Override
+    public void set(String key, T value) {
+        redisTemplate.boundValueOps(key).set(value);
+        KEYS.add(key);
+    }
+
+    @Override
+    public void set(String key, T value, long timeout) {
+        redisTemplate.boundValueOps(key).set(value, timeout, TimeUnit.MILLISECONDS);
+        KEYS.add(key);
+    }
+
+    @Override
+    public T get(String key) {
+        return redisTemplate.boundValueOps(key).get();
+    }
+
+    @Override
+    public void remove(String... keys) {
+        redisTemplate.delete(Arrays.stream(keys).toList());
+        KEYS.removeAll(Arrays.stream(keys).toList());
+    }
+
+    @Override
+    public void clear() {
+        remove(keys().toArray(String[]::new));
+    }
+
+    @Override
+    public void expire(String key, long timeout) {
+        redisTemplate.boundValueOps(key).expire(timeout, TimeUnit.MILLISECONDS);
+    }
+
+    @Override
+    public boolean contains(String key) {
+        T value = get(key);
+        return value != null;
+    }
+
+    @Override
+    public Collection<String> keys() {
+        return CollectionUtil.isEmpty(KEYS) ? null : KEYS;
+    }
+
+    @Override
+    public Map<String, T> all() {
+        Collection<String> keys = keys();
+        HashMap<String, T> map = MapUtil.newHashMap();
+        for(String key: keys){
+            map.put(key, get(key));
+        }
+        return map;
+    }
+}

@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="Encoding">
+    <file url="file://$PROJECT_DIR$/pw-api/pw-api-auth/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/pw-api/pw-api-auth/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/pw-api/pw-api-sys/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/pw-api/pw-api-sys/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/pw-api/src/main/java" charset="UTF-8" />
@@ -8,16 +10,28 @@
     <file url="file://$PROJECT_DIR$/pw-application/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/pw-application/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/pw-application/src/main/webapp" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/pw-cache/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/pw-cache/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/pw-core/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/pw-core/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/pw-db/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/pw-db/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/pw-file/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/pw-file/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/pw-logger/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/pw-logger/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/pw-mbp/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/pw-mbp/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/pw-modular/pw-modular-auth/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/pw-modular/pw-modular-auth/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/pw-modular/pw-modular-sys/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/pw-modular/pw-modular-sys/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/pw-modular/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/pw-modular/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/pw-security/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/pw-security/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/pw-validate/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/pw-validate/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/main/resources" charset="UTF-8" />
   </component>

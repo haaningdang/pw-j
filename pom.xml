@@ -17,6 +17,9 @@
         <module>pw-mbp</module>
         <module>pw-logger</module>
         <module>pw-security</module>
+        <module>pw-validate</module>
+        <module>pw-cache</module>
+        <module>pw-file</module>
     </modules>
 
     <properties>
@@ -33,6 +36,10 @@
         <druid.version>1.2.23</druid.version>
         <mybatis-plus.version>3.5.7</mybatis-plus.version>
         <jjwt.version>0.9.1</jjwt.version>
+        <jaxb.version>2.3.1</jaxb.version>
+        <validation.version>2.0.1.Final</validation.version>
+        <hibernate-validation.version>6.0.1.Final</hibernate-validation.version>
+        <redis.version>5.2.0</redis.version>
     </properties>
 
     <dependencyManagement>
@@ -97,6 +104,30 @@
                 <groupId>io.jsonwebtoken</groupId>
                 <artifactId>jjwt</artifactId>
                 <version>${jjwt.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>javax.xml.bind</groupId>
+                <artifactId>jaxb-api</artifactId>
+                <version>${jaxb.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>javax.validation</groupId>
+                <artifactId>validation-api</artifactId>
+                <version>${validation.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.hibernate.validator</groupId>
+                <artifactId>hibernate-validator</artifactId>
+                <version>${hibernate-validation.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>redis.clients</groupId>
+                <artifactId>jedis</artifactId>
+                <version>${redis.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

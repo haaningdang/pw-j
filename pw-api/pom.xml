@@ -15,6 +15,7 @@
     <url>http://maven.apache.org</url>
     <modules>
         <module>pw-api-sys</module>
+        <module>pw-api-auth</module>
     </modules>
 
     <properties>

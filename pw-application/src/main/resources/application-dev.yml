@@ -1,0 +1,6 @@
+pw:
+  cache:
+    open: local
+  file:
+    root: /data
+    temp: /data/tmp

@@ -7,7 +7,7 @@ import org.springframework.context.annotation.Configuration;
 
 @Slf4j
 @Configuration
-public class LoggerConfiguration extends LoggerAnnotationConfigure {
+public class LoggerConfigure extends LoggerAnnotationConfigure {
 
     @Override
     public void record(PwRequestDefinition definition) {

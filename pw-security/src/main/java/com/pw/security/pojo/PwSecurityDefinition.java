@@ -21,4 +21,6 @@ public class PwSecurityDefinition {
 
     private Map<String, Object> request;
 
+    private PwSecurityContext context;
+
 }

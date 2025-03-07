@@ -49,8 +49,38 @@
         </dependency>
 
         <dependency>
+            <groupId>com.pw.security</groupId>
+            <artifactId>pw-security</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.pw.validate</groupId>
+            <artifactId>pw-validate</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.pw.cache</groupId>
+            <artifactId>pw-cache</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.pw.file</groupId>
+            <artifactId>pw-file</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+
+        <dependency>
             <groupId>com.pw.modular</groupId>
             <artifactId>pw-modular-sys</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.pw.modular</groupId>
+            <artifactId>pw-modular-auth</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
 

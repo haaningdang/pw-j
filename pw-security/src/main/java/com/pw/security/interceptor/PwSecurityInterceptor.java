@@ -2,6 +2,7 @@ package com.pw.security.interceptor;
 
 import com.pw.core.util.HttpContextUtil;
 import com.pw.security.annotation.PwSecurity;
+import com.pw.security.pojo.PwSecurityContext;
 import com.pw.security.pojo.PwSecurityDefinition;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.HandlerInterceptor;
@@ -19,7 +20,7 @@ public abstract class PwSecurityInterceptor implements HandlerInterceptor {
         PwSecurityDefinition definition = parseDefinition();
         // 获取token
         definition.setToken(HttpContextUtil.header(Authorization));
-
+        definition.setContext(context());
 
         if(handler instanceof HandlerMethod method) {
             if(method.hasMethodAnnotation(PwSecurity.class)){
@@ -31,7 +32,6 @@ public abstract class PwSecurityInterceptor implements HandlerInterceptor {
         }
 
         defaultFilter(definition);
-
 
         return true;
     }
@@ -47,7 +47,9 @@ public abstract class PwSecurityInterceptor implements HandlerInterceptor {
         return definition;
     }
 
-    public abstract String filter(PwSecurityDefinition definition);
+    public abstract PwSecurityContext context();
 
-    public abstract String defaultFilter(PwSecurityDefinition definition);
+    public abstract void filter(PwSecurityDefinition definition);
+
+    public abstract void defaultFilter(PwSecurityDefinition definition);
 }

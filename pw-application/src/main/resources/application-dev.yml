@@ -1,6 +1,8 @@
 pw:
+  # 缓存开关配置
   cache:
     open: local
+  # 文件配置
   file:
     root: /data
     temp: /data/tmp

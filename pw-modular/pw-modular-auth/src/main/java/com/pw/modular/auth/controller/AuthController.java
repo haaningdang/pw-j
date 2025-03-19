@@ -7,6 +7,7 @@ import com.pw.core.annotation.PwFetch;
 import com.pw.core.annotation.PwRoute;
 import com.pw.core.basic.response.PwResponse;
 import com.pw.security.annotation.PwSecurity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import javax.annotation.Resource;
@@ -16,9 +17,8 @@ public class AuthController {
     @Resource
     private AuthService authService;
 
-    @PwSecurity
     @PwFetch(url = "/auth/login")
-    public PwResponse login(@RequestBody AuthRequest request) {
+    public PwResponse login(@Validated(AuthRequest.login.class) @RequestBody AuthRequest request) {
         return authService.login(request);
     }
 

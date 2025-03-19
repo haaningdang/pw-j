@@ -2,22 +2,16 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
-        <groupId>com.pw</groupId>
-        <artifactId>pw-j</artifactId>
+        <groupId>com.pw.modular</groupId>
+        <artifactId>pw-modular</artifactId>
         <version>1.0-SNAPSHOT</version>
     </parent>
 
-    <groupId>com.pw.api</groupId>
-    <artifactId>pw-api</artifactId>
-    <packaging>pom</packaging>
+    <artifactId>pw-moduler-file</artifactId>
+    <packaging>jar</packaging>
 
-    <name>pw-api</name>
+    <name>pw-moduler-file</name>
     <url>http://maven.apache.org</url>
-    <modules>
-        <module>pw-api-sys</module>
-        <module>pw-api-auth</module>
-        <module>pw-api-file</module>
-    </modules>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -25,10 +19,15 @@
 
     <dependencies>
         <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>3.8.1</version>
-            <scope>test</scope>
+            <groupId>com.pw.api</groupId>
+            <artifactId>pw-api-file</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.pw.file</groupId>
+            <artifactId>pw-file</artifactId>
+            <version>1.0-SNAPSHOT</version>
         </dependency>
     </dependencies>
 </project>

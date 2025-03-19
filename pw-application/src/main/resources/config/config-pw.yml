@@ -1,9 +1,11 @@
 pw:
+  # 上下文的数据源
   ds:
     url: ${spring.datasource.mysql.url}
     driver: ${spring.datasource.mysql.driver-class-name}
     username: ${spring.datasource.mysql.username}
     password: ${spring.datasource.mysql.password}
+  # 权限配置
   security:
     key: BdYnxR6P31LO3QR6
     secret: mQrHjRfZ8PoQ1rYx7ZHAwUHsNrq4X8tH

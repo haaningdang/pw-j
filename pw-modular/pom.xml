@@ -16,6 +16,7 @@
     <modules>
         <module>pw-modular-sys</module>
         <module>pw-modular-auth</module>
+        <module>pw-moduler-file</module>
     </modules>
 
     <properties>

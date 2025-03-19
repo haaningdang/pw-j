@@ -23,6 +23,22 @@ public class AuthServiceImpl implements AuthService {
     private SysUserService sysUserService;
 
     @Override
+    public SysUser fetchSysUserByAccount(String account) {
+        List<SysUser> users = sysUserService.fetchSysUserByAccount(account);
+        return CollUtil.isEmpty(users) ? null : users.get(0);
+    }
+
+    @Override
+    public boolean validateSysUser(SysUser sysUser) {
+        if (sysUser == null) {
+            return false;
+        }
+
+        int flag = sysUser.getFlag();
+        return flag == 1;
+    }
+
+    @Override
     public PwResponse login(AuthRequest request) {
         // 查询用户账号是否存在
         List<SysUser> sysUsers = sysUserService.fetchSysUserByAccount(request.getAccount());

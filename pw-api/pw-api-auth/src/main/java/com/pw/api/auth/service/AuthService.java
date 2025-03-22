@@ -20,8 +20,22 @@ public interface AuthService {
      */
     boolean validateSysUser(SysUser sysUser);
 
+    /**
+     * 用户登录
+     * @param request
+     * @return
+     */
     PwResponse login(AuthRequest request);
 
+    /**
+     * 退出登录
+     * @param request
+     * @return
+     */
     PwResponse logout(AuthRequest request);
+
+    PwResponse permission();
+
+    PwResponse menu();
 
 }

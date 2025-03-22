@@ -20,6 +20,15 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
         return this.list(wrapper);
     }
 
+    private LambdaQueryWrapper<SysUser> createWrapperFetchSysUser(Long id) {
+        return new LambdaQueryWrapper<SysUser>().eq(SysUser::getId, id);
+    }
+
+    @Override
+    public List<SysUser> fetchSysUserByUserId(Long userId) {
+        return fetchByWrapper(createWrapperFetchSysUser(userId));
+    }
+
     private LambdaQueryWrapper<SysUser> createWrapperFetchSysUserByAccount(String account) {
         return new LambdaQueryWrapper<SysUser>().eq(SysUser::getAccount, account);
     }

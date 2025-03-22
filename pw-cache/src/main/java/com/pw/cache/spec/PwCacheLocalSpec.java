@@ -12,8 +12,11 @@ public class PwCacheLocalSpec<T> implements PwCacheApi<T> {
 
     private final TimedCache<String, T> CACHE;
 
-    public PwCacheLocalSpec(TimedCache<String, T> cache) {
-        CACHE = cache;
+    private final String prefix;
+
+    public PwCacheLocalSpec(String prefix, TimedCache<String, T> cache) {
+        this.CACHE = cache;
+        this.prefix = prefix;
     }
 
     @Override
@@ -22,24 +25,29 @@ public class PwCacheLocalSpec<T> implements PwCacheApi<T> {
     }
 
     @Override
+    public String prefix() {
+        return this.prefix;
+    }
+
+    @Override
     public void set(String key, T value) {
-        CACHE.put(key, value);
+        CACHE.put(prefix()+key, value);
     }
 
     @Override
     public void set(String key, T value, long timeout) {
-        CACHE.put(key, value, timeout);
+        CACHE.put(prefix()+key, value, timeout);
     }
 
     @Override
     public T get(String key) {
-        return CACHE.get(key);
+        return CACHE.get(prefix()+key);
     }
 
     @Override
     public void remove(String... keys) {
         for (String key : keys) {
-            CACHE.remove(key);
+            CACHE.remove(prefix()+key);
         }
     }
 
@@ -50,12 +58,12 @@ public class PwCacheLocalSpec<T> implements PwCacheApi<T> {
 
     @Override
     public void expire(String key, long timeout) {
-        CACHE.put(key, CACHE.get(key), timeout);
+        CACHE.put(prefix()+key, CACHE.get(prefix()+key), timeout);
     }
 
     @Override
     public boolean contains(String key) {
-        return CACHE.containsKey(key);
+        return CACHE.containsKey(prefix()+key);
     }
 
     @Override
@@ -63,7 +71,12 @@ public class PwCacheLocalSpec<T> implements PwCacheApi<T> {
         Iterator<CacheObj<String, T>> iterator = CACHE.cacheObjIterator();
         Collection<String> collection = CollectionUtil.newArrayList();
         while (iterator.hasNext()) {
-            collection.add(iterator.next().getKey());
+            String key = iterator.next().getKey();
+            if(key.startsWith(prefix())) {
+                collection.add(key.substring(prefix().length()));
+            }else{
+                collection.add(key);
+            }
         }
         return collection;
     }
@@ -73,7 +86,7 @@ public class PwCacheLocalSpec<T> implements PwCacheApi<T> {
         Collection<String> keys = keys();
         HashMap<String, T> map = MapUtil.newHashMap();
         for(String key: keys){
-            map.put(key, CACHE.get(key));
+            map.put(prefix()+key, CACHE.get(prefix()+key));
         }
         return map;
     }

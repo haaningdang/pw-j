@@ -10,10 +10,3 @@ spring:
       - classpath:config/config-logging.yml
   profiles:
     active: dev
-
-  datasource:
-    mysql:
-      driver-class-name: com.mysql.cj.jdbc.Driver
-      url: jdbc:mysql://127.0.0.1:3306/pw?autoReconnect=true&useUnicode=true&charsetEncoding=utf8&useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true
-      username: pw
-      password: pw

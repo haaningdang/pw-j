@@ -27,4 +27,16 @@ public class AuthController {
     public PwResponse logout(@RequestBody AuthRequest request) {
         return authService.logout(request);
     }
+
+    @PwSecurity
+    @PwFetch(url = "/auth/permission")
+    public PwResponse permission() {
+        return authService.permission();
+    }
+
+    @PwSecurity
+    @PwFetch(url = "/auth/menu")
+    public PwResponse menu() {
+        return authService.menu();
+    }
 }

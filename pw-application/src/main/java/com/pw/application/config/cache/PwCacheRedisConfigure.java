@@ -11,7 +11,7 @@ public class PwCacheRedisConfigure {
 
     @Bean
     public PwCacheRedisSpec<String> pwCacheRedisSpecConfigure() {
-        return new PwCacheRedisSpec<String>(null);
+        return new PwCacheRedisSpec<String>("pw_",null);
     }
 
 }

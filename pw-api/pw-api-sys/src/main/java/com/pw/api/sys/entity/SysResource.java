@@ -9,31 +9,38 @@ import lombok.Data;
 import java.util.Date;
 
 @Data
-@TableName(value = "pw_sys_user")
-public class SysUser {
+@TableName(value = "pw_sys_resource")
+public class SysResource {
 
     @TableId(value = "id")
     private Long id;
 
-    @TableField(value = "account")
-    private String account;
+    @TableField(value = "parent_id")
+    private Long parentId;
 
-    @TableField(value = "phone")
-    private String phone;
+    @TableField(value = "res_code")
+    private String resCode;
 
-    @TableField(value = "phone")
-    private String name;
+    @TableField(value = "res_name")
+    private String resName;
 
-    @TableField(value = "password")
-    private String password;
+    @TableField(value = "res_url")
+    private String resUrl;
 
-    @TableField(value = "salt")
-    private String salt;
+    @TableField(value = "icon")
+    private String icon;
+
+    @TableField(value = "res_type")
+    private int resType;
 
     @TableField(value = "flag")
     private int flag;
 
+    @TableField(value = "sort")
+    private int sort;
+
     @TableField(value = "create_time",  fill = FieldFill.INSERT)
     private Date createTime;
+
 
 }

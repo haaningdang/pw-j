@@ -29,5 +29,17 @@
             <artifactId>pw-security</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
+
+        <dependency>
+            <groupId>com.pw.cache</groupId>
+            <artifactId>pw-cache</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.pw</groupId>
+            <artifactId>pw-login</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
     </dependencies>
 </project>

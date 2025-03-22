@@ -7,6 +7,13 @@ public interface PwCacheApi<T> {
 
     void init();
 
+
+    /**
+     * 设置前缀
+     * @return
+     */
+    String prefix();
+
     /**
      * 设置缓存
      * @param key

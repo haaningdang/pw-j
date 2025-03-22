@@ -12,14 +12,14 @@ import javax.servlet.http.HttpServletResponse;
 
 public abstract class PwSecurityInterceptor implements HandlerInterceptor {
 
-    private final static String Authorization = "Authorization";
+    private final static String authorization = "authorization";
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
 
         PwSecurityDefinition definition = parseDefinition();
         // 获取token
-        definition.setToken(HttpContextUtil.header(Authorization));
+        definition.setToken(HttpContextUtil.header(authorization));
         definition.setContext(context());
 
         if(handler instanceof HandlerMethod method) {

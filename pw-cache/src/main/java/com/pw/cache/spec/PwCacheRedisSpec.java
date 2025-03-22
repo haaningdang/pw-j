@@ -12,10 +12,13 @@ public class PwCacheRedisSpec<T> implements PwCacheApi<T> {
 
     private final RedisTemplate<String, T> redisTemplate;
 
+    private final String prefix;
+
     private final Collection<String> KEYS = CollectionUtil.newArrayList();
 
-    public PwCacheRedisSpec(RedisTemplate<String, T> redisTemplate) {
+    public PwCacheRedisSpec(String prefix, RedisTemplate<String, T> redisTemplate) {
         this.redisTemplate = redisTemplate;
+        this.prefix = prefix;
     }
 
     @Override
@@ -24,25 +27,30 @@ public class PwCacheRedisSpec<T> implements PwCacheApi<T> {
     }
 
     @Override
+    public String prefix() {
+        return this.prefix;
+    }
+
+    @Override
     public void set(String key, T value) {
-        redisTemplate.boundValueOps(key).set(value);
+        redisTemplate.boundValueOps(prefix() + key).set(value);
         KEYS.add(key);
     }
 
     @Override
     public void set(String key, T value, long timeout) {
-        redisTemplate.boundValueOps(key).set(value, timeout, TimeUnit.MILLISECONDS);
+        redisTemplate.boundValueOps(prefix() + key).set(value, timeout, TimeUnit.MILLISECONDS);
         KEYS.add(key);
     }
 
     @Override
     public T get(String key) {
-        return redisTemplate.boundValueOps(key).get();
+        return redisTemplate.boundValueOps(prefix() + key).get();
     }
 
     @Override
     public void remove(String... keys) {
-        redisTemplate.delete(Arrays.stream(keys).toList());
+        redisTemplate.delete(Arrays.stream(keys).map(item -> prefix() + item).toList());
         KEYS.removeAll(Arrays.stream(keys).toList());
     }
 
@@ -53,7 +61,7 @@ public class PwCacheRedisSpec<T> implements PwCacheApi<T> {
 
     @Override
     public void expire(String key, long timeout) {
-        redisTemplate.boundValueOps(key).expire(timeout, TimeUnit.MILLISECONDS);
+        redisTemplate.boundValueOps(prefix() + key).expire(timeout, TimeUnit.MILLISECONDS);
     }
 
     @Override

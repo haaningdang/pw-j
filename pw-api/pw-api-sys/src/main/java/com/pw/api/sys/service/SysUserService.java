@@ -10,6 +10,8 @@ public interface SysUserService extends IService<SysUser> {
 
     List<SysUser> fetchByWrapper(LambdaQueryWrapper<SysUser> wrapper);
 
+    List<SysUser> fetchSysUserByUserId(Long userId);
+
     List<SysUser> fetchSysUserByAccount(String account);
 
 }

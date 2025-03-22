@@ -12,7 +12,7 @@ public class PwCacheLocalConfigure {
 
     @Bean
     public PwCacheLocalSpec<String> pwCacheLocalSpecConfigure() {
-        return new PwCacheLocalSpec<String>(new TimedCache<>(900000L));
+        return new PwCacheLocalSpec<String>("pw_", new TimedCache<>(900000L));
     }
 
 }

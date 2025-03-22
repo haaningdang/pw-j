@@ -20,6 +20,7 @@
         <module>pw-validate</module>
         <module>pw-cache</module>
         <module>pw-file</module>
+        <module>pw-login</module>
     </modules>
 
     <properties>

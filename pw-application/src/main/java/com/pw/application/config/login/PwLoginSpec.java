@@ -7,10 +7,12 @@ import com.pw.cache.PwCacheApi;
 import com.pw.core.util.HttpContextUtil;
 import com.pw.login.PwLoginApi;
 import com.pw.login.pojo.PwLogin;
+import lombok.extern.slf4j.Slf4j;
 
 import javax.annotation.Resource;
 import java.util.Optional;
 
+@Slf4j
 public class PwLoginSpec implements PwLoginApi<PwLogin> {
 
     @Resource

@@ -22,6 +22,7 @@ import com.pw.core.context.PwApplicationContext;
 import com.pw.login.context.PwLoginContext;
 import com.pw.login.pojo.PwLogin;
 import com.pw.security.util.JwtUtil;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -31,6 +32,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+@Slf4j
 @Service
 public class AuthServiceImpl implements AuthService {
 
@@ -104,7 +106,7 @@ public class AuthServiceImpl implements AuthService {
         pwLogin.setAccount(sysUser.getAccount());
         pwLogin.setToken(token);
         pwLogin.setId(sysUser.getId());
-        pwCacheApi.set("LOGIN_"+token, JSON.toJSONString(pwLogin), 2*60*60+1200);
+        pwCacheApi.set("LOGIN_"+token, JSON.toJSONString(pwLogin), 2*60*60*1000+2*60*1000);
 
         // 返回内容
         return PwResponse.success(MapBuilder.create()

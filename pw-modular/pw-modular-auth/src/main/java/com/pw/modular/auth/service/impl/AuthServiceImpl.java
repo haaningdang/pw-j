@@ -5,8 +5,6 @@ import cn.hutool.core.convert.Convert;
 import cn.hutool.core.map.MapBuilder;
 import cn.hutool.core.text.CharSequenceUtil;
 import cn.hutool.core.util.StrUtil;
-import com.alibaba.fastjson2.JSON;
-import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.pw.api.auth.pojo.request.AuthRequest;
 import com.pw.api.auth.service.AuthService;
 import com.pw.api.auth.util.PasswordUtil;
@@ -19,7 +17,9 @@ import com.pw.api.sys.service.SysUserService;
 import com.pw.cache.PwCacheApi;
 import com.pw.core.basic.response.PwResponse;
 import com.pw.core.context.PwApplicationContext;
+import com.pw.login.PwLoginApi;
 import com.pw.login.context.PwLoginContext;
+import com.pw.login.pojo.PwClaims;
 import com.pw.login.pojo.PwLogin;
 import com.pw.security.util.JwtUtil;
 import lombok.extern.slf4j.Slf4j;
@@ -47,6 +47,9 @@ public class AuthServiceImpl implements AuthService {
 
     @Resource
     private SysResourceService sysResourceService;
+
+    @Resource
+    private PwLoginApi<PwLogin> pwLoginApi;
 
     /**
      * 通过账号获取用户信息
@@ -96,17 +99,10 @@ public class AuthServiceImpl implements AuthService {
         }
 
         // 构建token
-        Map<String, Object> claims = new HashMap<>();
-        claims.put("account", request.getAccount());
-        String token = JwtUtil.generate(PwApplicationContext.inst().getConfig().getKey(),
-                PwApplicationContext.inst().getConfig().getSecret(), claims, 2*60*60);
+        String token = PwClaims.login(sysUser.getId(), request.getAccount());
 
         // token缓存
-        PwLogin pwLogin = new PwLogin();
-        pwLogin.setAccount(sysUser.getAccount());
-        pwLogin.setToken(token);
-        pwLogin.setId(sysUser.getId());
-        pwCacheApi.set("LOGIN_"+token, JSON.toJSONString(pwLogin), 2*60*60*1000+2*60*1000);
+        pwLoginApi.login(token);
 
         // 返回内容
         return PwResponse.success(MapBuilder.create()
@@ -199,6 +195,7 @@ public class AuthServiceImpl implements AuthService {
     @Override
     public PwResponse permission() {
         List<SysResource> resources = fetchSysResourceByLoginContext();
+
         if(CollUtil.isEmpty(resources)){
             return PwResponse.success();
         }

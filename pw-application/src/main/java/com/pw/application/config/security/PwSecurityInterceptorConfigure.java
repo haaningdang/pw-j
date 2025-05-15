@@ -1,8 +1,10 @@
 package com.pw.application.config.security;
 
 import cn.hutool.core.convert.Convert;
+import cn.hutool.core.util.StrUtil;
 import com.pw.api.auth.service.AuthService;
 import com.pw.api.sys.entity.SysUser;
+import com.pw.cache.PwCacheApi;
 import com.pw.core.context.PwApplicationContext;
 import com.pw.core.exception.PwAuthException;
 import com.pw.security.interceptor.PwSecurityInterceptor;
@@ -22,6 +24,9 @@ public class PwSecurityInterceptorConfigure extends PwSecurityInterceptor {
     @Resource
     private AuthService authService;
 
+    @Resource
+    private PwCacheApi<String> pwCacheApi;
+
     @Override
     public PwSecurityContext context() {
         PwSecurityContext context = new PwSecurityContext();
@@ -39,6 +44,13 @@ public class PwSecurityInterceptorConfigure extends PwSecurityInterceptor {
 
         String token = definition.getToken();
         try{
+
+            // 无登录缓存信息
+            String loginString =pwCacheApi.get("LOGIN_"+token);
+            if(StrUtil.isBlank(loginString)){
+                throw new PwAuthException("授权过期，请重新登录");
+            }
+
             Claims claims = JwtUtil.claims(token, context.getSecret());
             String account = Convert.toStr(claims.get("account"), "").trim();
 

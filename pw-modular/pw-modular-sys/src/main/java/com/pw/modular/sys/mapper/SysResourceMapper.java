@@ -24,4 +24,11 @@ public interface SysResourceMapper extends BaseMapper<SysResource> {
             "</script>")
     List<SysResource> fetchResourceByRoleId(@Param("roles") List<String> roles);
 
+    /**
+     * 查询所有有效的资源
+     * @return
+     */
+    @Select("select * from pw_sys_resource as t1 order by t1.sort asc , t1.create_time desc ")
+    List<SysResource> fetchResource();
+
 }

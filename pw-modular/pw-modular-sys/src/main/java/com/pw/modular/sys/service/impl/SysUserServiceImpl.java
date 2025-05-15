@@ -1,9 +1,13 @@
 package com.pw.modular.sys.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.pw.api.sys.entity.SysUser;
+import com.pw.api.sys.pojo.request.user.PageRequest;
 import com.pw.api.sys.service.SysUserService;
+import com.pw.core.basic.response.PwResponse;
+import com.pw.mbp.page.PwPageUtil;
 import com.pw.modular.sys.mapper.SysUserMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -36,5 +40,11 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
     @Override
     public List<SysUser> fetchSysUserByAccount(String account) {
         return fetchByWrapper(createWrapperFetchSysUserByAccount(account));
+    }
+
+    @Override
+    public PwResponse page(PageRequest request) {
+        Page<SysUser> page = this.baseMapper.page(PwPageUtil.wrapper(request), request);
+        return PwResponse.success(PwPageUtil.response(page));
     }
 }

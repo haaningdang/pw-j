@@ -14,7 +14,7 @@ public interface SysRoleMapper extends BaseMapper<SysRole> {
     @Select("select " +
             "   t1.* " +
             "from pw_sys_role as t1 " +
-            "join pw_sys_user_role as t2 " +
+            "join pw_sys_user_role as t2 on t1.id = t2.role_id " +
             "where t2.user_id = #{userId}")
     List<SysRole> fetchRoleByUserId(@Param("userId") Long userId);
 

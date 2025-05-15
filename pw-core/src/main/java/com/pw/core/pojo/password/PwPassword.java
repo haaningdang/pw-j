@@ -1,4 +1,4 @@
-package com.pw.api.auth.pojo.dto;
+package com.pw.core.pojo.password;
 
 import lombok.Builder;
 import lombok.Data;

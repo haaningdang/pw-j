@@ -21,7 +21,7 @@ public class SysUser {
     @TableField(value = "phone")
     private String phone;
 
-    @TableField(value = "phone")
+    @TableField(value = "name")
     private String name;
 
     @TableField(value = "password")

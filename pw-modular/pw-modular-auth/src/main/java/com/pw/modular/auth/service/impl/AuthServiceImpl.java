@@ -7,7 +7,7 @@ import cn.hutool.core.text.CharSequenceUtil;
 import cn.hutool.core.util.StrUtil;
 import com.pw.api.auth.pojo.request.AuthRequest;
 import com.pw.api.auth.service.AuthService;
-import com.pw.api.auth.util.PasswordUtil;
+import com.pw.core.util.PasswordUtil;
 import com.pw.api.sys.entity.SysResource;
 import com.pw.api.sys.entity.SysRole;
 import com.pw.api.sys.entity.SysUser;
@@ -16,18 +16,15 @@ import com.pw.api.sys.service.SysRoleService;
 import com.pw.api.sys.service.SysUserService;
 import com.pw.cache.PwCacheApi;
 import com.pw.core.basic.response.PwResponse;
-import com.pw.core.context.PwApplicationContext;
 import com.pw.login.PwLoginApi;
 import com.pw.login.context.PwLoginContext;
 import com.pw.login.pojo.PwClaims;
 import com.pw.login.pojo.PwLogin;
-import com.pw.security.util.JwtUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -127,11 +124,14 @@ public class AuthServiceImpl implements AuthService {
             return null;
         }
 
+        log.info("sysUsers:{}", sysUsers);
         // 获取用户角色
         List<SysRole> roles = sysRoleService.fetchRoleByUserId(userId);
         if(CollUtil.isEmpty(roles)){
             return null;
         }
+
+        log.info("roles: {}", roles);
 
         // 获取角色所有的资源
         List<SysResource> resources = sysResourceService.fetchResourceByRoleId(roles.stream().map(item -> Convert.toStr(item.getId(), "")).collect(Collectors.toList()));

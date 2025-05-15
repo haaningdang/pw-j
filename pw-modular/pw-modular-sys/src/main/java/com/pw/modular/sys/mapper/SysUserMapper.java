@@ -6,6 +6,7 @@ import com.pw.api.sys.entity.SysUser;
 import com.pw.api.sys.pojo.request.user.PageRequest;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 import java.util.List;
 
@@ -36,5 +37,8 @@ public interface SysUserMapper extends BaseMapper<SysUser> {
             "order by t1.create_time desc" +
             "</script>")
     Page<SysUser> page(@Param("page") Page page, @Param("request") PageRequest request);
+
+    @Update("update pw_sys_user set salt = #{salt}, password = #{password} where id = #{id}")
+    int updatePassword(@Param("id") Long id, @Param("salt") String salt, @Param("password") String password);
 
 }

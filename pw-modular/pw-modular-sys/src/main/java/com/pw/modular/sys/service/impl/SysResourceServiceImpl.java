@@ -13,6 +13,7 @@ import com.pw.login.pojo.PwLogin;
 import com.pw.modular.sys.mapper.SysResourceMapper;
 import org.springframework.stereotype.Service;
 
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -104,7 +105,9 @@ public class SysResourceServiceImpl extends ServiceImpl<SysResourceMapper, SysRe
 
         // 获取所有有效资源
         List<SysResource> resources = fetchResourceByRoleId(roles);
-        List<Long> selected = resources.stream().map(SysResource::getId).toList();
+
+        List<SysResource> roleResources = fetchResourceByRoleId(Collections.singletonList(Convert.toStr(request.getRoleId())));
+        List<Long> selected = roleResources.stream().map(SysResource::getId).toList();
 
         // 资源转树结构
         List<ResourceTree> res = createResourceTree(request.getRoleId(), resources, -1L);

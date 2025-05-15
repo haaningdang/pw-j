@@ -1,11 +1,9 @@
-package com.pw.api.auth.util;
+package com.pw.core.util;
 
 import cn.hutool.core.text.CharSequenceUtil;
 import cn.hutool.core.util.StrUtil;
-import com.pw.api.auth.pojo.dto.PwPassword;
 import com.pw.core.enums.crypto.PwCrypto;
-import com.pw.core.util.CryptoUtil;
-import com.pw.core.util.RandomGenerator;
+import com.pw.core.pojo.password.PwPassword;
 
 public class PasswordUtil {
 

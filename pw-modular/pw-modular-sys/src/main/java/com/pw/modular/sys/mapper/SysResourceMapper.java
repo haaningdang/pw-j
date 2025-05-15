@@ -19,7 +19,8 @@ public interface SysResourceMapper extends BaseMapper<SysResource> {
             "   <foreach collection=\"roles\" item=\"item\" open=\"(\" close=\")\" separator=\",\">" +
             "       #{item}" +
             "   </foreach>" +
-            "   and t1.flag = 1" +
+            "   and t1.flag = 1 " +
+            "   group by t1.id " +
             "   order by t1.sort asc, t1.create_time desc " +
             "</script>")
     List<SysResource> fetchResourceByRoleId(@Param("roles") List<String> roles);

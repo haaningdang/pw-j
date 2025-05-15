@@ -30,6 +30,12 @@ public class SysUserController {
         return sysUserService.add(request);
     }
 
+    @PwFetch(url = "/sys/user/delete")
+    @PwSecurity
+    public PwResponse delete(@RequestBody UserRequest request) {
+        return sysUserService.del(request);
+    }
+
     @PwFetch(url = "/sys/user/reset")
     @PwSecurity
     public PwResponse reset(@RequestBody UserRequest request) {

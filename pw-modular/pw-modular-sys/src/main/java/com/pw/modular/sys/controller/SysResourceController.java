@@ -16,6 +16,15 @@ public class SysResourceController {
     private SysResourceService sysResourceService;
 
     /**
+     * 资源分页
+     * @return
+     */
+    @PwFetch(url = "/sys/resource/page")
+    public PwResponse page() {
+        return sysResourceService.page();
+    }
+
+    /**
      * 获取资源
      * @return
      */

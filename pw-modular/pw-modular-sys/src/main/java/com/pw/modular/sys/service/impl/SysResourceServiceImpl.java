@@ -4,6 +4,7 @@ import cn.hutool.core.convert.Convert;
 import cn.hutool.core.map.MapBuilder;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.pw.api.sys.entity.SysResource;
+import com.pw.api.sys.pojo.dto.resource.ResourcePageTree;
 import com.pw.api.sys.pojo.dto.resource.ResourceTree;
 import com.pw.api.sys.pojo.request.resource.ResourceRequest;
 import com.pw.api.sys.service.SysResourceService;
@@ -11,9 +12,9 @@ import com.pw.core.basic.response.PwResponse;
 import com.pw.login.context.PwLoginContext;
 import com.pw.login.pojo.PwLogin;
 import com.pw.modular.sys.mapper.SysResourceMapper;
+import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -79,6 +80,33 @@ public class SysResourceServiceImpl extends ServiceImpl<SysResourceMapper, SysRe
     private boolean roleHasResource(Long resourceId, Long roleId) {
         // 获取角色所有的资源
         return fetchResourceByRoleId(Collections.singletonList(Convert.toStr(roleId))).stream().anyMatch(resource -> resource.getId().equals(resourceId));
+    }
+
+    /**
+     * 创建分页的资源树
+     * @param resources
+     * @param parentId
+     * @return
+     */
+    private List<ResourcePageTree> createResourcePageTree(List<SysResource> resources, Long parentId) {
+        // 第一级数据
+        return resources.stream().filter(resource -> resource.getParentId().equals(parentId)).map(item -> {
+            ResourcePageTree res = new ResourcePageTree();
+            BeanUtils.copyProperties(item, res);
+            if(hasChild(resources, item.getId())){
+                res.setChildren(createResourcePageTree(resources, item.getId()));
+            }
+            return res;
+        }).collect(Collectors.toList());
+    }
+
+    @Override
+    public PwResponse page() {
+        // 获取所有资源
+        List<SysResource> resources = fetchResource();
+        List<ResourcePageTree> res = createResourcePageTree(resources, -1L);
+
+        return PwResponse.success(res);
     }
 
     @Override

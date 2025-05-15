@@ -7,4 +7,8 @@ public interface SysUserRoleService extends IService<SysUserRole> {
 
     void saveUserRole(SysUserRole sysUserRole);
 
+    void deleteByUserId(Long userId);
+
+    void deleteByRoleId(Long roleId);
+
 }

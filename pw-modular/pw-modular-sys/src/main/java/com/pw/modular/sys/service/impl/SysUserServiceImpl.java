@@ -96,6 +96,14 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
     }
 
     @Override
+    public PwResponse del(UserRequest request) {
+        this.removeById(request.getId());
+        sysUserRoleService.deleteByUserId(request.getId());
+
+        return PwResponse.success();
+    }
+
+    @Override
     public PwResponse reset(UserRequest request) {
         List<SysUser> users = fetchSysUserByUserId(request.getId());
         if(CollUtil.isEmpty(users)){

@@ -32,6 +32,13 @@ public interface SysUserService extends IService<SysUser> {
     PwResponse add(UserRequest request);
 
     /**
+     * 删除用户
+     * @param request
+     * @return
+     */
+    PwResponse del(UserRequest request);
+
+    /**
      * 重置密码
      * @param request
      * @return

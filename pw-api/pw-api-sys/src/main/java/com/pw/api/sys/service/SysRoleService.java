@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
 import com.pw.api.sys.entity.SysRole;
 import com.pw.api.sys.pojo.request.role.PageRequest;
 import com.pw.api.sys.pojo.request.role.RoleRequest;
+import com.pw.api.sys.pojo.request.role.RoleResourceRequest;
 import com.pw.core.basic.response.PwResponse;
 
 import java.util.List;
@@ -16,6 +17,10 @@ public interface SysRoleService extends IService<SysRole> {
 
     PwResponse add(RoleRequest request);
 
+    PwResponse del(RoleRequest request);
+
     PwResponse select();
+
+    PwResponse resource(RoleResourceRequest request);
 
 }

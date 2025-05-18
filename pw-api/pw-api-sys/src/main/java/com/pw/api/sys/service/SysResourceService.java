@@ -19,4 +19,12 @@ public interface SysResourceService extends IService<SysResource> {
 
     PwResponse fetchRoleResource(ResourceRequest request);
 
+    PwResponse select();
+
+    PwResponse add(ResourceRequest request);
+
+    PwResponse update(ResourceRequest request);
+
+    PwResponse delete(ResourceRequest request);
+
 }

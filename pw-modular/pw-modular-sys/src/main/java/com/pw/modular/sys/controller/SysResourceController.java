@@ -43,4 +43,28 @@ public class SysResourceController {
         return sysResourceService.fetchRoleResource(request);
     }
 
+    /**
+     * 资源树
+     * @return
+     */
+    @PwFetch(url = "/sys/resource/select")
+    public PwResponse select() {
+        return sysResourceService.select();
+    }
+
+    @PwFetch(url = "/sys/resource/add")
+    public PwResponse add(@RequestBody ResourceRequest request) {
+        return sysResourceService.add(request);
+    }
+
+    @PwFetch(url = "/sys/resource/update")
+    public PwResponse update(@RequestBody ResourceRequest request) {
+        return sysResourceService.update(request);
+    }
+
+    @PwFetch(url = "/sys/resource/delete")
+    public PwResponse delete(@RequestBody ResourceRequest request) {
+        return sysResourceService.delete(request);
+    }
+
 }

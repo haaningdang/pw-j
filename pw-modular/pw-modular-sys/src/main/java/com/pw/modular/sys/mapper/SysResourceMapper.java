@@ -32,4 +32,12 @@ public interface SysResourceMapper extends BaseMapper<SysResource> {
     @Select("select * from pw_sys_resource as t1 order by t1.sort asc , t1.create_time desc ")
     List<SysResource> fetchResource();
 
+    /**
+     * 通过id查询资源
+     * @param id
+     * @return
+     */
+    @Select("select * from pw_sys_resource where id = #{id}")
+    List<SysResource> fetchResourceById(@Param("id") Long id);
+
 }
